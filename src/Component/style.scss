@@ -1,0 +1,25 @@
+/*Khai báo biến (dùng biến --> tái sử dụng )*/
+$myColor: red;
+$textColor : red ; 
+/*Khả năng xếp chồng */
+//mixin 
+//@mixin nameMixin()
+// @include nameMixin : tái sử dụng như một function
+@mixin bgc($bgcolor: yellow) {
+  background-color: $bgcolor;
+}
+.header {
+  padding: 2rem ; 
+  @include bgc(black) ;
+  &-inner {
+    color : white ;
+    &-text {
+      color: blue;
+      // header-inner-text
+      &:hover {
+        color : orange ;
+      }
+    }
+  } // sẽ tương ứng với header-inner 
+}
+/*mixin : */

@@ -1,0 +1,190 @@
+// 1. Điểm nổi bật đầu tiền của SASS và SCSS đó là biến (Varible) 
+@import './mixin/mixin';
+// @use 'mixin/mixin' ;
+$Color : #ff533e ; 
+$mouthColor : black ; 
+$beakdownColor : #aa4c21 ; 
+$featherColor: #939393;
+$beaktopColor: #e9581a;
+$legColor: #00adef;
+$bodyColor: #e3edf7;
+// Đặc điểm thứ 2 của SASS và SCSS đó là Lồng thẻ (Nesting)
+%shared {
+    position: absolute; 
+    border-radius: 50%;
+}
+.bird {
+    background: $bodyColor ;
+    font-family: sans-serif;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;      
+    .container {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        .body {
+           // Khối body 
+           @extend %shared ; 
+            // position: absolute;
+            // border-radius: 50%;
+            top: 26px;
+            left: 50px;
+            height: 180px;
+            width: 200px;
+            transform: rotate(-17deg);
+            background: linear-gradient(to bottom, transparent 0%, transparent 20%, $Color 20%);
+            z-index: 2;
+            
+        }
+        .mouth {
+            @extend %shared ; 
+            // border-radius: 50%;
+            // position: absolute;
+            background: $mouthColor;
+            top: 20px;
+            left: -175px;
+            width: 100px;
+            height: 100px;
+            transform: rotate(-17deg);
+            z-index: 5;
+            animation: animate-mouth 1.5s forwards;
+            animation-delay: 2s;
+            @include keyframes(animate-mouth) {
+                100% {
+                    left:175px;
+                }
+            }
+            @include animate (animate-mouth,1.5s, forwards ) ; 
+            // pesudo : :hover , :active , :link , ::after , ::before
+            &::before {
+                content: "";
+                width: 30px;
+                height: 30px;
+                background: white;
+                position: absolute;
+                top: 20px;
+                left: 40px;
+                border-radius: 50%;
+            }
+            &::after {
+                content: "";
+                width: 10px;
+                height: 10px;
+                background: black;
+                position: absolute;
+                top: 30px;
+                left: 55px;
+                border-radius: 50%;
+                @include keyframes(animate-eye) {
+                    50% {
+                        height: 5px;
+                    }
+                }
+               @include animate(animate-eye, 1s , infinite) ;
+                animation-delay: 4s;
+            }
+        }
+        .feather {
+            z-index: 4;
+            left: 44px;
+            top: -5.5px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent 0%, transparent 50%, $featherColor 50%);
+            transform: rotate(-17deg);
+            position: absolute;
+            border-radius: 50%;
+            @include keyframes(animate-feather){
+                100% {
+                    top : -6 ; 
+                }
+            }
+            @include animate(animate-feather , 1.5s, forwards) ; 
+            animation-delay: 2s;
+        }
+        .tail {
+            border-radius: 50%;
+            position: absolute;
+            width: 150px;
+            height: 60px;
+            background-color: $mouthColor;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+            top: 92px;
+            left: 324px;
+            transform: rotate(-17deg);
+            z-index: 3;
+            @include keyframes(animate-tail){
+                100% {
+                    left : -24px
+                }
+            }
+            @include animate(animate-tail , 1.5s, forwards) ; 
+            animation-delay: 2s;
+        }
+        .beak {
+            position: absolute;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            background: linear-gradient(to bottom, $beaktopColor 0%, $beaktopColor 15%, transparent 15% );
+            left: 224px;
+            top: 240px;
+            z-index: 0;
+            transform: rotate(-17deg);
+            @include keyframes(animate-beak){
+                100% {
+                    top : 40px
+                }
+            }
+            @include animate(animate-beak , 1.5s, forwards) ; 
+            animation-delay: 2s;
+        }
+        .leg {
+            position: absolute;
+            background: $legColor ;
+            height: 50px;
+            width: 10px;
+            border-radius: 10px;
+            top: 515px;
+            left: 125px;
+            transform: rotate(-15deg);
+            z-index: 1;
+            @keyframes animate-leg {
+                100% {
+                    top: 215px;
+                }
+            }
+            @include animate(animate-leg , 1.5s , forwards);
+            &::before {
+                bottom: -8px;
+                content: "";
+                width: 40px;
+                height: 9px;
+                background: $legColor;
+                border-radius: 10px;
+                transform: rotate(15deg);
+                z-index: -1;
+                position: absolute;
+            }
+            &::after {
+                top: -8px;
+                content: "";
+                width: 30px;
+                height: 9px;
+                background: $legColor ;
+                border-radius: 10px;
+                transform: rotate(-15deg);
+                z-index: -1;
+                position: absolute;
+            }
+        }
+        .brand {
+            position: absolute;
+            top : -50px;
+        }
+    }
+    
+}
